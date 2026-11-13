@@ -1,0 +1,90 @@
+Nov  4 01:58:22 campus-gw sshd[3524]: Accepted publickey for jdelacruz from 10.0.0.12 port 48419 ssh2
+Nov  4 01:58:45 campus-gw sshd[8386]: pam_unix(sshd:session): session opened for user jdelacruz by (uid=0)
+Nov  4 01:59:20 campus-gw sshd[4632]: Accepted publickey for asantos from 10.0.0.18 port 42728 ssh2
+Nov  4 01:59:36 campus-gw sshd[5550]: pam_unix(sshd:session): session opened for user asantos by (uid=0)
+Nov  4 02:00:04 campus-gw sshd[7653]: Accepted publickey for bvillanueva from 10.0.0.21 port 53007 ssh2
+Nov  4 02:00:24 campus-gw sshd[5025]: pam_unix(sshd:session): session opened for user bvillanueva by (uid=0)
+Nov  4 02:00:52 campus-gw sshd[3710]: Failed password for invalid user admin from 198.51.100.23 port 56304 ssh2
+Nov  4 02:01:10 campus-gw sshd[8778]: Failed password for invalid user test from 198.51.100.23 port 64237 ssh2
+Nov  4 02:01:15 campus-gw sshd[7667]: Failed password for invalid user oracle from 198.51.100.23 port 42687 ssh2
+Nov  4 02:01:43 campus-gw sshd[3969]: Failed password for invalid user admin from 198.51.100.23 port 48703 ssh2
+Nov  4 02:01:47 campus-gw sshd[6243]: Failed password for invalid user guest from 198.51.100.23 port 55147 ssh2
+Nov  4 02:02:00 campus-gw sshd[7725]: Failed password for invalid user root from 198.51.100.23 port 45044 ssh2
+Nov  4 02:02:05 campus-gw sshd[5567]: Connection closed by 198.51.100.23 port 51629 [preauth]
+Nov  4 02:02:17 campus-gw sshd[8565]: Failed password for jchristian from 10.0.0.15 port 51105 ssh2
+Nov  4 02:02:20 campus-gw sshd[8364]: Failed password for jchristian from 10.0.0.15 port 59495 ssh2
+Nov  4 02:02:51 campus-gw sshd[8154]: Accepted password for jchristian from 10.0.0.15 port 56507 ssh2
+Nov  4 02:02:56 campus-gw sshd[5757]: pam_unix(sshd:session): session opened for user jchristian by (uid=0)
+Nov  4 02:03:09 campus-gw sshd[3833]: Failed password for root from 203.0.113.77 port 53894 ssh2
+Nov  4 02:03:24 campus-gw sshd[2499]: Failed password for invalid user admin from 203.0.113.77 port 63537 ssh2
+Nov  4 02:03:48 campus-gw sshd[8498]: Failed password for invalid user ubuntu from 203.0.113.77 port 40421 ssh2
+Nov  4 02:04:09 campus-gw sshd[2525]: Failed password for invalid user pi from 203.0.113.77 port 58544 ssh2
+Nov  4 02:04:34 campus-gw sshd[5319]: Failed password for svc_backup from 203.0.113.77 port 49578 ssh2
+Nov  4 02:04:42 campus-gw sshd[7870]: Failed password for root from 203.0.113.77 port 58535 ssh2
+Nov  4 02:04:51 campus-gw sshd[5278]: Failed password for invalid user administrator from 203.0.113.77 port 42488 ssh2
+Nov  4 02:05:24 campus-gw sshd[6446]: Failed password for svc_backup from 203.0.113.77 port 63173 ssh2
+Nov  4 02:05:44 campus-gw sshd[5619]: Failed password for root from 203.0.113.77 port 63003 ssh2
+Nov  4 02:06:07 campus-gw sshd[6563]: Failed password for invalid user admin from 203.0.113.77 port 60703 ssh2
+Nov  4 02:06:37 campus-gw sshd[3266]: Failed password for invalid user ubuntu from 203.0.113.77 port 51866 ssh2
+Nov  4 02:06:42 campus-gw sshd[6020]: Failed password for invalid user pi from 203.0.113.77 port 59495 ssh2
+Nov  4 02:06:53 campus-gw sshd[4089]: Failed password for svc_backup from 203.0.113.77 port 59363 ssh2
+Nov  4 02:07:03 campus-gw sshd[2929]: Failed password for root from 203.0.113.77 port 56014 ssh2
+Nov  4 02:07:07 campus-gw sshd[5633]: Failed password for invalid user administrator from 203.0.113.77 port 58967 ssh2
+Nov  4 02:07:22 campus-gw sshd[8187]: Failed password for svc_backup from 203.0.113.77 port 57017 ssh2
+Nov  4 02:08:01 campus-gw sshd[8952]: Failed password for root from 203.0.113.77 port 48053 ssh2
+Nov  4 02:08:26 campus-gw sshd[8278]: Failed password for invalid user admin from 203.0.113.77 port 42996 ssh2
+Nov  4 02:08:42 campus-gw sshd[6422]: Failed password for invalid user ubuntu from 203.0.113.77 port 54264 ssh2
+Nov  4 02:09:20 campus-gw sshd[4636]: Failed password for invalid user pi from 203.0.113.77 port 41819 ssh2
+Nov  4 02:09:53 campus-gw sshd[8913]: Failed password for svc_backup from 203.0.113.77 port 60315 ssh2
+Nov  4 02:10:09 campus-gw sshd[3733]: pam_unix(sshd:session): session closed for user asantos
+Nov  4 02:10:35 campus-gw sshd[8190]: Failed password for root from 203.0.113.77 port 51666 ssh2
+Nov  4 02:11:05 campus-gw sshd[4603]: Failed password for invalid user administrator from 203.0.113.77 port 60065 ssh2
+Nov  4 02:11:45 campus-gw sshd[4336]: Failed password for svc_backup from 203.0.113.77 port 50282 ssh2
+Nov  4 02:12:12 campus-gw sshd[2848]: Failed password for root from 203.0.113.77 port 45599 ssh2
+Nov  4 02:12:39 campus-gw sshd[3924]: Failed password for invalid user admin from 203.0.113.77 port 42579 ssh2
+Nov  4 02:13:09 campus-gw sshd[6348]: Failed password for invalid user ubuntu from 203.0.113.77 port 60246 ssh2
+Nov  4 02:13:32 campus-gw sshd[4510]: Failed password for invalid user pi from 203.0.113.77 port 64751 ssh2
+Nov  4 02:13:40 campus-gw sshd[7782]: Failed password for svc_backup from 203.0.113.77 port 50894 ssh2
+Nov  4 02:14:09 campus-gw sshd[7613]: Failed password for root from 203.0.113.77 port 61495 ssh2
+Nov  4 02:14:21 campus-gw sshd[6427]: Failed password for invalid user administrator from 203.0.113.77 port 43334 ssh2
+Nov  4 02:14:34 campus-gw sshd[2722]: Failed password for svc_backup from 203.0.113.77 port 58697 ssh2
+Nov  4 02:15:02 campus-gw sshd[2115]: Failed password for root from 203.0.113.77 port 47627 ssh2
+Nov  4 02:15:35 campus-gw sshd[5450]: Failed password for invalid user admin from 203.0.113.77 port 60633 ssh2
+Nov  4 02:15:50 campus-gw sshd[2256]: Failed password for invalid user ubuntu from 203.0.113.77 port 57131 ssh2
+Nov  4 02:16:13 campus-gw sshd[6603]: Failed password for invalid user pi from 203.0.113.77 port 53609 ssh2
+Nov  4 02:16:43 campus-gw sshd[6557]: Failed password for svc_backup from 203.0.113.77 port 45918 ssh2
+Nov  4 02:17:20 campus-gw sshd[2615]: Failed password for root from 203.0.113.77 port 52837 ssh2
+Nov  4 02:17:44 campus-gw sshd[7647]: Failed password for invalid user administrator from 203.0.113.77 port 55373 ssh2
+Nov  4 02:18:23 campus-gw sshd[5312]: Failed password for svc_backup from 203.0.113.77 port 53833 ssh2
+Nov  4 02:18:58 campus-gw sshd[6283]: Failed password for root from 203.0.113.77 port 49542 ssh2
+Nov  4 02:19:04 campus-gw sshd[6847]: Failed password for invalid user admin from 203.0.113.77 port 53636 ssh2
+Nov  4 02:19:33 campus-gw sshd[2396]: Failed password for invalid user ubuntu from 203.0.113.77 port 43574 ssh2
+Nov  4 02:20:00 campus-gw sshd[7396]: Failed password for invalid user pi from 203.0.113.77 port 45264 ssh2
+Nov  4 02:20:16 campus-gw sshd[8361]: Failed password for svc_backup from 203.0.113.77 port 61244 ssh2
+Nov  4 02:20:30 campus-gw sshd[5235]: Failed password for root from 203.0.113.77 port 56472 ssh2
+Nov  4 02:20:48 campus-gw sshd[5873]: Failed password for invalid user administrator from 203.0.113.77 port 59307 ssh2
+Nov  4 02:20:51 campus-gw sshd[7281]: Failed password for svc_backup from 203.0.113.77 port 61809 ssh2
+Nov  4 02:20:55 campus-gw sshd[6578]: Accepted password for svc_backup from 203.0.113.77 port 46478 ssh2
+Nov  4 02:21:35 campus-gw sshd[8005]: pam_unix(sshd:session): session opened for user svc_backup by (uid=0)
+Nov  4 02:21:54 campus-gw sshd[6504]: pam_unix(sshd:session): session closed for user jdelacruz
+Nov  4 02:22:03 campus-gw sshd[6748]: Accepted publickey for asantos from 10.0.0.18 port 52198 ssh2
+Nov  4 02:22:05 campus-gw sshd[4994]: pam_unix(sshd:session): session opened for user asantos by (uid=0)
+Nov  4 02:22:15 campus-gw sshd[4922]: pam_unix(sshd:session): session closed for user jchristian
+Nov  4 02:22:24 campus-gw sshd[7188]: Failed password for invalid user root from 198.51.100.23 port 62835 ssh2
+Nov  4 02:22:43 campus-gw sshd[2948]: Failed password for invalid user admin from 198.51.100.23 port 55157 ssh2
+Nov  4 02:23:01 campus-gw sshd[7035]: Disconnected from invalid user admin 198.51.100.23 port 56736 [preauth]
+Nov  4 02:23:14 campus-gw sshd[6912]: pam_unix(sshd:session): session closed for user bvillanueva
+Nov  4 02:23:49 campus-gw sshd[2596]: Accepted publickey for cnavarro from 10.0.0.25 port 51003 ssh2
+Nov  4 02:24:22 campus-gw sshd[7956]: pam_unix(sshd:session): session opened for user cnavarro by (uid=0)
+Nov  4 02:24:54 campus-gw sshd[3443]: pam_unix(sshd:session): session closed for user cnavarro
+Nov  4 02:25:01 campus-gw sshd[8309]: Accepted publickey for jdelacruz from 10.0.0.12 port 40146 ssh2
+Nov  4 02:25:11 campus-gw sshd[5832]: pam_unix(sshd:session): session opened for user jdelacruz by (uid=0)
+Nov  4 02:25:23 campus-gw sshd[8807]: pam_unix(sshd:session): session closed for user jdelacruz
+Nov  4 02:25:50 campus-gw sshd[6902]: Accepted publickey for asantos from 10.0.0.18 port 44411 ssh2
+Nov  4 02:25:59 campus-gw sshd[4258]: pam_unix(sshd:session): session opened for user asantos by (uid=0)
+Nov  4 02:26:02 campus-gw sshd[7909]: pam_unix(sshd:session): session closed for user asantos
+Nov  4 02:26:29 campus-gw sshd[7489]: Accepted publickey for bvillanueva from 10.0.0.21 port 55215 ssh2
+Nov  4 02:26:33 campus-gw sshd[7656]: pam_unix(sshd:session): session opened for user bvillanueva by (uid=0)
+Nov  4 02:27:05 campus-gw sshd[3149]: pam_unix(sshd:session): session closed for user bvillanueva
+Nov  4 02:27:15 campus-gw sshd[5498]: Server listening on 0.0.0.0 port 22.
+Nov  4 02:27:51 campus-gw sshd[5795]: Server listening on :: port 22.

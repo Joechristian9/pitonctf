@@ -1,0 +1,4 @@
+body { font-family: system-ui, sans-serif; }
+.event { border-left: 4px solid #23408e; padding-left: .75rem; margin: .75rem 0; }
+/* designer note, delete before go-live: CTF{stylesheets_hold_secrets_too} */
+.event time { color: #6b7280; }

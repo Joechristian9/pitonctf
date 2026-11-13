@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff Attic · PITON Portal</title>
+<style>
+  :root { --navy: #0b2545; --navy-2: #13315c; --gold: #f4b400; --ink: #1b2432; --muted: #5b6577; --paper: #f5f7fb; --line: #dde3ee; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.5; }
+  .topbar { background: var(--navy); color: #fff; }
+  .topbar .inner { max-width: 64rem; margin: 0 auto; padding: .9rem 1.25rem; display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; }
+  .mark { width: 2.5rem; height: 2.5rem; border-radius: .6rem; background: var(--gold); color: var(--navy); display: grid; place-items: center; font-weight: 800; }
+  .brand strong { display: block; font-size: 1.05rem; letter-spacing: .08em; }
+  .brand span { display: block; font-size: .78rem; opacity: .85; }
+  nav { margin-left: auto; display: flex; gap: 1rem; font-size: .9rem; }
+  nav a { color: #fff; text-decoration: none; opacity: .85; }
+  nav a:hover { opacity: 1; text-decoration: underline; }
+  .hero { background: linear-gradient(135deg, var(--navy-2), var(--navy)); color: #fff; padding: 1.75rem 1.25rem; border-bottom: 4px solid var(--gold); }
+  .hero h1 { max-width: 64rem; margin: 0 auto; font-size: 1.5rem; }
+  main { max-width: 64rem; margin: 1.5rem auto; padding: 0 1.25rem; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: .75rem; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+  .card h2 { margin-top: 0; font-size: 1.15rem; color: var(--navy); }
+  label { display: block; margin: .75rem 0 .25rem; font-weight: 600; }
+  input { width: 100%; padding: .55rem .7rem; border: 1px solid #b9c3d6; border-radius: .5rem; font-size: 1rem; }
+  button { margin-top: 1rem; padding: .55rem 1.1rem; border: 0; border-radius: .5rem; background: var(--navy); color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; }
+  button:disabled { background: #9aa4b5; cursor: not-allowed; }
+  code { background: #eef2f8; padding: .1rem .3rem; border-radius: .25rem; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  footer { text-align: center; font-size: .8rem; color: var(--muted); padding: 2rem 1rem; }
+</style>
+<meta name="robots" content="noindex">
+</head>
+<body>
+<header class="topbar"><div class="inner">
+  <div class="mark" aria-hidden="true">P</div>
+  <div class="brand"><strong>PITON</strong><span>Philippine Information Technology of the North</span></div>
+  <nav aria-label="Portal"><a href="index.html">Home</a><a href="events.html">Events</a><a href="timetable.html">Timetable</a></nav>
+</div></header>
+<div class="hero"><h1>Staff Attic</h1></div>
+<main>
+<div class="card">
+  <h2>Staff attic (internal)</h2>
+  <p>Search engines are told not to come here, so nobody will ever find this page. Right?</p>
+  <p>Spare projector code: <strong>CTF{robots_guard_the_staff_attic}</strong></p>
+</div>
+</main>
+<footer>Practice page for the PITON CTF. It is not a real PITON system, and every name and number on it is made up.</footer>
+</body>
+</html>
