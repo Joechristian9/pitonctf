@@ -10,7 +10,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Fail if TS sources exist
         run: |
           FOUND=$(git ls-files 'resources/js/*.ts' 'resources/js/*.tsx')
