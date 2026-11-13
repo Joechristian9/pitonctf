@@ -95,10 +95,7 @@ class ChallengeController extends Controller
 
         return Inertia::render('challenges', [
             'game' => $game->forPage(),
-            'team' => $team === null ? null : [
-                'name' => $team->name,
-                'members' => $team->members()->orderBy('name')->pluck('name'),
-            ],
+            'team' => $team === null ? null : ['name' => $team->name],
             'categories' => $categories,
         ]);
     }

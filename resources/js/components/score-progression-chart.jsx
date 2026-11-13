@@ -86,7 +86,7 @@ export default function ScoreProgressionChart({ progression }) {
                         <Legend wrapperStyle={{ fontSize: 12 }} />
                         {progression.map((team, index) => (
                             <Line
-                                key={team.id}
+                                key={index}
                                 data={team.steps}
                                 dataKey="points"
                                 name={team.name}

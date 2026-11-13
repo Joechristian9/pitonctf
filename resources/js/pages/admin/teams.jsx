@@ -161,11 +161,56 @@ function TeamCard({ team, unassigned, teamSize }) {
                     </ul>
                 )}
 
+                <Codename team={team} />
+
                 {!isFull && <AddMember team={team} unassigned={unassigned} />}
 
                 <DeleteTeam team={team} />
             </CardContent>
         </Card>
+    );
+}
+
+/** The name students see on the scoreboard instead of the real team name. */
+function Codename({ team }) {
+    const inputId = `codename-${team.id}`;
+
+    return (
+        <Form
+            {...TeamController.updateCodename.form(team.id)}
+            options={{ preserveScroll: true }}
+            className="grid gap-2"
+        >
+            {({ processing, errors }) => (
+                <>
+                    <Label htmlFor={inputId}>Scoreboard codename</Label>
+                    <div className="flex gap-2">
+                        <Input
+                            id={inputId}
+                            name="codename"
+                            defaultValue={team.codename ?? ''}
+                            maxLength={100}
+                            placeholder="e.g. Red Falcon"
+                            aria-invalid={errors.codename ? true : undefined}
+                        />
+                        <Button
+                            type="submit"
+                            variant="outline"
+                            disabled={processing}
+                        >
+                            Save
+                        </Button>
+                    </div>
+                    <InputError message={errors.codename} />
+                    {!team.codename && (
+                        <p className="text-xs text-muted-foreground">
+                            No codename: students see the real team name on the
+                            scoreboard.
+                        </p>
+                    )}
+                </>
+            )}
+        </Form>
     );
 }
 

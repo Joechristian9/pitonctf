@@ -3,6 +3,7 @@
 use App\Models\Challenge;
 use App\Models\Solve;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -38,7 +39,7 @@ test('teams are ranked by earned points with ties going to the earliest last sol
         ->component('scoreboard')
         ->where('scoreboard.0.name', 'Bravo')
         ->where('scoreboard.0.points', 100)
-        ->has('scoreboard.0.members', 4)
+        ->missing('scoreboard.0.members')
         ->where('scoreboard.2.name', 'Delta')
         ->where('scoreboard.2.points', 25));
 
@@ -67,4 +68,47 @@ test('the chart shows at most the top 10 teams and nothing before the first solv
 
     $this->get(route('scoreboard'))
         ->assertInertia(fn (Assert $page) => $page->has('progression', 10));
+});
+
+test('students see only codenames, not real names, members or team ids', function () {
+    $team = Team::factory()->complete()->create(['name' => 'Bravo', 'codename' => 'Red Falcon']);
+    Solve::create(['team_id' => $team->id, 'challenge_id' => Challenge::factory()->create()->id, 'points' => 50]);
+
+    $this->actingAs($team->members()->firstOrFail())
+        ->get(route('scoreboard'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('scoreboard.0', ['name' => 'Red Falcon', 'points' => 50])
+            ->where('progression.0.name', 'Red Falcon')
+            ->missing('progression.0.id')
+            ->missing('progression.0.real_name'))
+        ->assertDontSee('Bravo');
+});
+
+test('admins see the real name behind each codename', function () {
+    Team::factory()->complete()->create(['name' => 'Bravo', 'codename' => 'Red Falcon']);
+
+    $this->actingAs(User::factory()->admin()->create())
+        ->get(route('scoreboard'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('scoreboard.0.name', 'Red Falcon')
+            ->where('scoreboard.0.real_name', 'Bravo'));
+});
+
+test('the admin sets and clears a team codename, and codenames are unique', function () {
+    $admin = User::factory()->admin()->create();
+    $team = Team::factory()->create();
+    Team::factory()->create(['name' => 'Bravo', 'codename' => 'Red Falcon']);
+
+    $this->actingAs($admin)->patch(route('admin.teams.codename', $team), ['codename' => 'Blue Owl'])->assertRedirect();
+    expect($team->fresh()->codename)->toBe('Blue Owl');
+
+    foreach (['Red Falcon', 'Bravo'] as $taken) {
+        $this->patch(route('admin.teams.codename', $team), ['codename' => $taken])
+            ->assertSessionHasErrors(['codename' => 'Another team already uses this name or codename.']);
+    }
+
+    $this->post(route('admin.teams.store'), ['name' => 'Red Falcon'])->assertSessionHasErrors('name');
+
+    $this->patch(route('admin.teams.codename', $team), ['codename' => '']);
+    expect($team->fresh()->codename)->toBeNull();
 });

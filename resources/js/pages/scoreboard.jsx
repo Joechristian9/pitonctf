@@ -1,4 +1,4 @@
-import { Head, usePage, usePoll } from '@inertiajs/react';
+import { Head, usePoll } from '@inertiajs/react';
 import { ChartLine, Trophy } from 'lucide-react';
 import { lazy, Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -11,8 +11,6 @@ const ScoreProgressionChart = lazy(
 );
 
 export default function Scoreboard({ scoreboard, progression }) {
-    const { auth } = usePage().props;
-
     // Only the live data is reloaded, so the rest of the page stays put.
     usePoll(5000, { only: ['scoreboard', 'progression'] });
 
@@ -32,10 +30,6 @@ export default function Scoreboard({ scoreboard, progression }) {
                             aria-hidden="true"
                         />
                     </h1>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                        Updates every 5 seconds. Ties go to whoever reached the
-                        score first.
-                    </p>
                 </header>
 
                 <Panel icon={ChartLine} title="Score progression">
@@ -79,19 +73,11 @@ export default function Scoreboard({ scoreboard, progression }) {
                                 </thead>
                                 <tbody>
                                     {scoreboard.map((team, index) => {
-                                        const isMine =
-                                            team.id === auth.user.team_id;
-
                                         return (
                                             <tr
-                                                key={team.id}
-                                                aria-current={
-                                                    isMine ? 'true' : undefined
-                                                }
-                                                className={cn(
-                                                    'border-b transition-colors last:border-0 hover:bg-muted/40',
-                                                    isMine && 'bg-primary/10',
-                                                )}
+                                                // No team id is sent to students, so rows are keyed by place.
+                                                key={index}
+                                                className="border-b transition-colors last:border-0 hover:bg-muted/40"
                                             >
                                                 <td className="px-3 py-3">
                                                     <span
@@ -109,17 +95,14 @@ export default function Scoreboard({ scoreboard, progression }) {
                                                     <span className="font-semibold break-words">
                                                         {team.name}
                                                     </span>
-                                                    {isMine && (
-                                                        <span className="text-muted-foreground">
-                                                            {' '}
-                                                            (your team)
-                                                        </span>
-                                                    )}
-                                                    <span className="block text-xs text-muted-foreground">
-                                                        {team.members.join(
-                                                            ', ',
+                                                    {/* Only admins get the real name behind a codename. */}
+                                                    {team.real_name &&
+                                                        team.real_name !==
+                                                            team.name && (
+                                                            <span className="block text-xs text-muted-foreground">
+                                                                {team.real_name}
+                                                            </span>
                                                         )}
-                                                    </span>
                                                 </td>
                                                 <td className="px-3 py-3 text-right font-mono text-base font-bold tabular-nums">
                                                     {team.points}

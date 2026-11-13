@@ -5,11 +5,13 @@ use App\Models\Challenge;
 use App\Models\Game;
 use App\Models\Guess;
 use App\Models\Solve;
+use App\Models\Team;
 use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
 
 test('students cannot use the admin area', function (string $method, string $uri) {
     Challenge::factory()->create();
+    Team::factory()->create();
     $student = User::factory()->create();
 
     $this->actingAs($student)
@@ -32,6 +34,7 @@ test('students cannot use the admin area', function (string $method, string $uri
     'add class list' => ['post', '/admin/users/bulk'],
     'reset password' => ['post', '/admin/users/{student}/password'],
     'delete student' => ['delete', '/admin/users/{student}'],
+    'set team codename' => ['patch', '/admin/teams/1/codename'],
 ]);
 
 test('the admin home shows the game and its challenges', function () {

@@ -99,7 +99,8 @@ export default function ChallengeCard({ challenge, isPlayable }) {
                     </span>
                 </button>
             </DialogTrigger>
-            <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
+            {/* wrap-anywhere: hex codes, flags and file names have no spaces and would widen the dialog past the screen. */}
+            <DialogContent className="max-h-[90vh] overflow-y-auto wrap-anywhere sm:max-w-lg">
                 <DialogHeader>
                     <DialogTitle>{challenge.title}</DialogTitle>
                     <DialogDescription>

@@ -78,13 +78,10 @@ function TeamBanner({ team }) {
     }
 
     return (
-        <div className="flex flex-col gap-1 rounded-xl border p-4 text-sm sm:flex-row sm:items-center sm:justify-between">
-            <p className="flex items-center gap-2 font-semibold">
-                <Swords className="size-4 text-primary" />
-                {team.name}
-            </p>
-            <p className="text-muted-foreground">{team.members.join(', ')}</p>
-        </div>
+        <p className="flex items-center justify-center gap-3 rounded-xl border p-5 text-xl font-bold tracking-tight">
+            <Swords className="size-6 text-primary" />
+            {team.name}
+        </p>
     );
 }
 

@@ -27,6 +27,7 @@ class TeamController extends Controller
                 ->map(fn (Team $team): array => [
                     'id' => $team->id,
                     'name' => $team->name,
+                    'codename' => $team->codename,
                     'points' => (int) $team->solves_sum_points,
                     'members' => $team->members->map->only(['id', 'name', 'email'])->values(),
                 ]),
@@ -41,11 +42,30 @@ class TeamController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate(['name' => ['required', 'string', 'max:100', Rule::unique(Team::class)]]);
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:100', Rule::unique(Team::class), Rule::unique(Team::class, 'codename')],
+        ]);
 
         $team = Team::create($validated);
 
         Inertia::flash('toast', ['type' => 'success', 'message' => "Created {$team->name}."]);
+
+        return back();
+    }
+
+    /**
+     * Set the name students see on the scoreboard; empty shows the real team name there.
+     */
+    public function updateCodename(Request $request, Team $team): RedirectResponse
+    {
+        $validated = $request->validate([
+            // Not another team's real name either, or two rows would show the same name.
+            'codename' => ['nullable', 'string', 'max:100', Rule::unique(Team::class)->ignore($team), Rule::unique(Team::class, 'name')->ignore($team)],
+        ], ['codename.unique' => 'Another team already uses this name or codename.']);
+
+        $team->update(['codename' => $validated['codename'] ?? null]);
+
+        Inertia::flash('toast', ['type' => 'success', 'message' => "Saved the codename for {$team->name}."]);
 
         return back();
     }

@@ -14,13 +14,14 @@ use Illuminate\Support\Carbon;
  *
  * @property int $id
  * @property string $name
+ * @property string|null $codename Shown to students on the scoreboard instead of the name.
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read int $members_count Only set when loaded with withCount().
  * @property-read int $solves_count Only set when loaded with withCount().
  * @property-read int|string|null $solves_sum_points Only set when loaded with withSum().
  */
-#[Fillable(['name'])]
+#[Fillable(['name', 'codename'])]
 class Team extends Model
 {
     /** @use HasFactory<TeamFactory> */

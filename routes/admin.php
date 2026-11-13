@@ -20,6 +20,7 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group
     Route::get('teams', [TeamController::class, 'index'])->name('teams.index');
     Route::post('teams', [TeamController::class, 'store'])->name('teams.store');
     Route::delete('teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
+    Route::patch('teams/{team}/codename', [TeamController::class, 'updateCodename'])->name('teams.codename');
     Route::post('teams/{team}/members', [TeamController::class, 'addMember'])->name('teams.members.store');
     Route::delete('teams/{team}/members/{user}', [TeamController::class, 'removeMember'])->name('teams.members.destroy');
 
