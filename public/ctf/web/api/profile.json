@@ -1,0 +1,9 @@
+{
+    "name": "Joe Christian",
+    "year": 2,
+    "program": "BS Information Technology",
+    "debug": {
+        "build": "2026.11.04",
+        "token": "CTF{the_network_tab_sees_all}"
+    }
+}

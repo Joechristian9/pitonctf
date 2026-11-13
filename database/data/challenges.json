@@ -1,0 +1,423 @@
+[
+    {
+        "number": 1,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "Sticky Note",
+        "points": 50,
+        "description": "A sticky note was found on the lab monitor. It looks like gibberish, but the IT club swears it is \"just encoded, not encrypted\".",
+        "hint": "Encoded is not encrypted. This alphabet has 64 letters and sometimes pads its ending.",
+        "links": [
+            "ctf/crypto/sticky-note.txt"
+        ],
+        "flag_hash": "aab406a41e4d39103f6520a74f9a07d01a7ee41f98e9dc917c0ec956e2d10f17"
+    },
+    {
+        "number": 2,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "Intercepted Message",
+        "points": 100,
+        "description": "Two students were passing this message in class. The letters are scrambled, but the punctuation and the curly braces were left alone.",
+        "hint": "An emperor once moved every letter the same few steps down the alphabet. There are not many steps to try.",
+        "links": [
+            "ctf/crypto/intercepted.txt"
+        ],
+        "flag_hash": "b7fabc324fe54021628bc9b6347e0cc477aab41f255606af237538103a2ab5d5"
+    },
+    {
+        "number": 3,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "Weak Librarian",
+        "points": 150,
+        "description": "The old library kiosk still stores the librarian password the lazy way. Ironically, the kiosk itself warns everyone about weak passwords. Which one did the librarian use? Submit it as CTF{password}.",
+        "hint": "Kiosks show visitors one thing and keep notes for their maintainers. You cannot reverse a fingerprint, but you can fingerprint every suspect on the list and compare.",
+        "links": [
+            "ctf/web/library-kiosk.html"
+        ],
+        "flag_hash": "d3bdd119b83ffd02ac61beb15ecb19565e823e285bc835a06399eaaf682b4b11"
+    },
+    {
+        "number": 4,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Student Portal",
+        "points": 50,
+        "description": "The new student portal launched in a hurry. Developers often leave notes for each other where visitors do not normally look.",
+        "hint": "Developers leave notes for each other in places the page never shows you.",
+        "links": [
+            "ctf/web/index.html"
+        ],
+        "flag_hash": "d117e6209115df2b0997e555776ead01a0e2f59dbd515124532337ca1e995c3a"
+    },
+    {
+        "number": 5,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Polite Robots",
+        "points": 100,
+        "description": "The portal lives at /ctf/web/. Its webmaster asked search engines to stay away from one page. That request is public.",
+        "hint": "Websites leave instructions for search engine crawlers. What they ask crawlers to avoid can be very interesting.",
+        "links": [
+            "ctf/web/index.html"
+        ],
+        "flag_hash": "9cb9d15e7c06e9ae80dbb30a0596e186e979145e78a0e63581429a8c4ee21009"
+    },
+    {
+        "number": 6,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Registrar Login",
+        "points": 150,
+        "description": "The registrar built a staff login page with no server behind it. If the page can check your password by itself, it must know the answer.",
+        "hint": "If a page can check your password without asking any server, the answer must already be inside the page.",
+        "links": [
+            "ctf/web/login.html"
+        ],
+        "flag_hash": "4f7dc18cd946ac5d6cf4ac80f69ba0ba4bf40fb0ef07eed2807f57f18455afdd"
+    },
+    {
+        "number": 7,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "Who Got In?",
+        "points": 100,
+        "description": "Someone hammered the campus SSH gateway overnight. Lots of people typed wrong passwords, but only one outsider actually got in. Submit their IP as CTF{ip.address}.",
+        "hint": "Plenty of people knocked. Look for the one stranger who kept knocking until the door opened.",
+        "links": [
+            "ctf/forensics/auth.log"
+        ],
+        "flag_hash": "5835351d005b6c45e282c8b7505dffcd4b86e958bb71ba5f3a39aea883875b06"
+    },
+    {
+        "number": 8,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "Badge Photo",
+        "points": 100,
+        "description": "This ID badge picture was posted on the campus forum. The picture is boring, but files often carry extra information about themselves.",
+        "hint": "A picture is worth a thousand words, and some of those words are not in the pixels.",
+        "links": [
+            "ctf/forensics/campus-badge.png"
+        ],
+        "flag_hash": "255bbef9689cb945c4e2149a6918884b95f61bd5d45159969ea426cc293a176b"
+    },
+    {
+        "number": 9,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "Leaked Backup",
+        "points": 150,
+        "description": "The portal web server log shows an automated attack. After poking at the grades page, the attacker went looking for database backups and eventually walked away with one. Submit the file name as CTF{file_name.ext}.",
+        "hint": "Automated tools announce themselves. Follow that visitor until one of its requests finally succeeded.",
+        "links": [
+            "ctf/forensics/access.log"
+        ],
+        "flag_hash": "1fae472b1ba18b141c1521b9c52154f364fecbc004c4c36623d7db6cbfc18f20"
+    },
+    {
+        "number": 10,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "Hex Dump",
+        "points": 50,
+        "description": "The lab printer jammed and spat out a page of number-and-letter pairs. Every pair is one character.",
+        "hint": "Only sixteen different symbols appear here, and they always travel in pairs.",
+        "links": [
+            "ctf/crypto/hex-dump.txt"
+        ],
+        "flag_hash": "835de71e7bbd89da8080ff52e039c5deab75778d57319af32eba794ca01f5d2d"
+    },
+    {
+        "number": 11,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "Bell Tower",
+        "points": 50,
+        "description": "The old bell tower rings long and short. Someone wrote the pattern down as groups of eight ones and zeros.",
+        "hint": "Two symbols, groups of eight. Computers read this before breakfast.",
+        "links": [
+            "ctf/crypto/bell-tower.txt"
+        ],
+        "flag_hash": "d95adda7a6af9c9908b1dc7ed4fd3044bb17f7412f7ab60ad1e5cfcbc6cbe015"
+    },
+    {
+        "number": 12,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "Mirror Mirror",
+        "points": 100,
+        "description": "The mirror club pinned this note on the PITON board. They write the way things look in a mirror, and then scramble the letters a little for good measure: }qrgngbe_qan_fqenjxpno{SGP :rqbp legar ohyp ebeevZ",
+        "hint": "Read it the way the mirror club writes it, then undo the half-turn of the alphabet.",
+        "links": [],
+        "flag_hash": "686ce853521703aba1955515110c899ea1b5b712258c834a7ca22ba954b3d30b"
+    },
+    {
+        "number": 13,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "Layer Cake",
+        "points": 150,
+        "description": "The baking club made a poster for the PITON bake sale and hid their secret recipe somewhere in it. The recipe itself is wrapped in three layers. Find it, then peel the layers one at a time, from the outside in.",
+        "hint": "The recipe is not printed on the poster, but a picture file can carry words too. Each layer is a different recipe; peel the outermost one first.",
+        "links": [
+            "ctf/crypto/bake-sale-poster.png"
+        ],
+        "flag_hash": "847e9d6a0f26ed528fc8bda0753640cc596c91931ed29d480355cd18d4cdf0af"
+    },
+    {
+        "number": 14,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "Otter Club",
+        "points": 200,
+        "description": "The cipher club locks its member notes with a Vigenère cipher. Their key is always the same word, and they are proud of it. Everything you need is on their club page.",
+        "hint": "Every letter gets its own shift, decided by one word. Clubs love to brag about their mascot.",
+        "links": [
+            "ctf/web/cipher-club.html"
+        ],
+        "flag_hash": "8d5b6be009ef246bdafc9ecd7457673f5c5d699ecf176333a9751accd4afc70f"
+    },
+    {
+        "number": 15,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "XOR Locker",
+        "points": 200,
+        "description": "Someone stuck this code on locker 12: 7b58545c52451706051754585a555e5956435e58590d177463714c58595268554e4352684f5845685e44684052565c4a It is the combination note, mixed with a single secret byte and written as hex. One byte has only 256 possible values.",
+        "hint": "Every character was mixed with the same single secret ingredient. There are only 256 ingredients to taste.",
+        "links": [],
+        "flag_hash": "eceec425d00a6e8399827430dfbb295de241d0ce56d13f79c748a39789640122"
+    },
+    {
+        "number": 16,
+        "category": "Crypto",
+        "unlocks_category": null,
+        "title": "Fence Line",
+        "points": 250,
+        "description": "The archive memo was first turned into Base64, then written in a zigzag across a few \"rails\" of a fence and read off rail by rail. Nobody wrote down how many rails were used, and the memo is packed away.",
+        "hint": "Picture writing on a fence that zigzags up and down. Nobody told you how tall the fence is, so count the rails.",
+        "links": [
+            "ctf/crypto/archive-memo.zip"
+        ],
+        "flag_hash": "814a0c58d7772b9cfb04d30cd596a2d63d81aa6bad3d1140cfffc6c49c2dad15"
+    },
+    {
+        "number": 17,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Style Points",
+        "points": 50,
+        "description": "The events page got a fresh design. The HTML is clean this time, but a page is more than its HTML.",
+        "hint": "A page wears clothes made in another file. Designers sometimes leave notes in the seams.",
+        "links": [
+            "ctf/web/events.html"
+        ],
+        "flag_hash": "4712c195d51822f36aa32660898145d966cb8dff61ec1b61bea23194b6404b49"
+    },
+    {
+        "number": 18,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Cookie Jar",
+        "points": 100,
+        "description": "The gradebook decides who you are by reading a cookie it gave you. Cookies live in your browser, so who really controls them?",
+        "hint": "The page believes whatever your browser tells it about who you are.",
+        "links": [
+            "ctf/web/gradebook.html"
+        ],
+        "flag_hash": "e5c7dde0c4ef2e0136006e0b5c5f0e25001bee44445f45cb94ae6a3b7179db57"
+    },
+    {
+        "number": 19,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Remember Me",
+        "points": 100,
+        "description": "This page \"remembers\" you by saving a token in your browser. Anything saved in the browser can be read by the person using it.",
+        "hint": "The page remembered you somewhere inside your own browser. Browsers keep more than cookies.",
+        "links": [
+            "ctf/web/remember.html"
+        ],
+        "flag_hash": "7c824464e60d3b6a279194f71b950ca457d368725f8f07142c6239321eee121d"
+    },
+    {
+        "number": 20,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Quiet Request",
+        "points": 150,
+        "description": "The profile page only shows your name and program, but it downloads more than it shows.",
+        "hint": "The page received more than it showed. Watch what it downloads while it loads.",
+        "links": [
+            "ctf/web/profile.html"
+        ],
+        "flag_hash": "d852c75469faa20e188e16e968d7690c6d8320f4f6e6e4f7153ee491aa1390b8"
+    },
+    {
+        "number": 21,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Source Map Spill",
+        "points": 200,
+        "description": "The timetable clock script was minified, so it should be unreadable. But the developers shipped a little helper file that undoes the minifying.",
+        "hint": "Minified code is hard to read, but developers keep a map back to the original. Did they ship it?",
+        "links": [
+            "ctf/web/timetable.html"
+        ],
+        "flag_hash": "a190e5587bbfa75539995ec08b9cd63593644d6a10c8d7bcbb3fda86f5cfb3bb"
+    },
+    {
+        "number": 22,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Greyed Out",
+        "points": 200,
+        "description": "The PIN reset button is greyed out, so it cannot be clicked. But the page you see is just a copy living in your own browser.",
+        "hint": "Grey does not mean gone. The page you are looking at is a copy you are allowed to change.",
+        "links": [
+            "ctf/web/pin-reset.html"
+        ],
+        "flag_hash": "7c89778225ec00d35acb23f968f9a642d7d801a298bbba2a39da17a0c90f424b"
+    },
+    {
+        "number": 23,
+        "category": "Web",
+        "unlocks_category": null,
+        "title": "Three Locks",
+        "points": 250,
+        "description": "The staff vault checks three things, and every check happens inside your browser. Open all three locks at once.",
+        "hint": "Every lock is checked by the page itself. Learn how it checks, then give it exactly what it wants.",
+        "links": [
+            "ctf/web/vault.html"
+        ],
+        "flag_hash": "84109f7e9331bbad443b29c9ee7ca60a2559b65acc72563a2d08dbaee4585af6"
+    },
+    {
+        "number": 24,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "Homework.dat",
+        "points": 50,
+        "description": "A classmate sent their homework as \"homework.dat\" and nothing on the PC will open it. The file name lies, but the first bytes of a file never do.",
+        "hint": "File names can lie. The first few characters of a file cannot.",
+        "links": [
+            "ctf/forensics/homework.dat"
+        ],
+        "flag_hash": "7a8208d2fc208892bff697bef3a8ac85f62fa7d02dbefd7915786bc399dcf35b"
+    },
+    {
+        "number": 25,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "Box in a Box",
+        "points": 150,
+        "description": "The robotics club wrapped their prize like a gift: a box inside a box inside a box. Keep unwrapping.",
+        "hint": "Some gifts are wrapped more than once. Keep unwrapping.",
+        "links": [
+            "ctf/forensics/gift-box.zip"
+        ],
+        "flag_hash": "245103146ede8f1f442e74eb3ce01ad21c7efbdfc691dd6b183d342321bcc7e4"
+    },
+    {
+        "number": 26,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "Field Trip",
+        "points": 100,
+        "description": "The photo club posted a picture from the field trip. Cameras write a lot of hidden details into every photo they take.",
+        "hint": "Cameras remember more than the picture. Some of their notes are written with gaps between the letters.",
+        "links": [
+            "ctf/forensics/field-trip.png"
+        ],
+        "flag_hash": "247c4f62d008bb99bebf9629620bc7cd9f44b6ccbb52433b8e7c0ec1550ebe2c"
+    },
+    {
+        "number": 27,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "Cleartext Login",
+        "points": 150,
+        "description": "The old intranet still uses plain HTTP. A browser recording (a .har file) caught a staff member logging in. They got the password wrong once, then right. Submit the password that worked.",
+        "hint": "Browsers can record every request they make. Find the attempt the server liked.",
+        "links": [
+            "ctf/forensics/intranet-login.har"
+        ],
+        "flag_hash": "99b4af8496a2228b31a59e1afcefad7cb9336cc5b57f2c23ae00102edeafe078"
+    },
+    {
+        "number": 28,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "DNS Whisper",
+        "points": 200,
+        "description": "The lab router logs every DNS lookup. One laptop asked for some very odd names. The firewall blocks uploads but lets DNS through, and the names themselves can carry data.",
+        "hint": "Some of these names are far too long to be real websites. Put the pieces back in order.",
+        "links": [
+            "ctf/forensics/router-dns.log"
+        ],
+        "flag_hash": "7a4c41ebfe0f6c381d4843cff99e6c508361f7870b3d8dd35dadf792e116941d"
+    },
+    {
+        "number": 29,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "Locked Grades",
+        "points": 200,
+        "description": "This backup of the grades is password protected. Open it with WinRAR or 7-Zip and look around: not everything inside is locked.",
+        "hint": "Not everything in this archive is locked, and people are bad at keeping a secret away from its secret.",
+        "links": [
+            "ctf/forensics/grades-backup.zip"
+        ],
+        "flag_hash": "b73ff007e1326d276253a08f7017c92bc5947ea8d651514771370effd80d3daa"
+    },
+    {
+        "number": 30,
+        "category": "Forensics",
+        "unlocks_category": null,
+        "title": "Poster Secret",
+        "points": 250,
+        "description": "The club poster opens fine as a picture, but the file is far bigger than a tiny striped image should be. Something is tucked in after the picture ends.",
+        "hint": "This picture is far too heavy for such a simple image. Look past where the picture should end.",
+        "links": [
+            "ctf/forensics/club-poster.png"
+        ],
+        "flag_hash": "8286e2e796f08bde56682988ebd0be43f3b3877786f1b1bf7e45020d1da9c8a5"
+    },
+    {
+        "number": 31,
+        "category": "Warm-up",
+        "unlocks_category": "Crypto",
+        "title": "Welcome to PITON CTF",
+        "points": 0,
+        "description": "Every answer in this CTF is a flag that starts with CTF{ and ends with }. For your first one, get to know us: PITON has an official home online where it introduces itself to the world, and the flag is part of that introduction. Solving it unlocks the Crypto challenges.",
+        "hint": "Student organizations introduce themselves online in one short line at the top of their page. Where does PITON post its announcements?",
+        "links": [],
+        "flag_hash": "3210137d2862c1fa3aa2e9c2d714318e90627224c2ba630d46dc8bbb68d5be57"
+    },
+    {
+        "number": 32,
+        "category": "Warm-up",
+        "unlocks_category": "Web",
+        "title": "Membership Form",
+        "points": 0,
+        "description": "A new member just filled in the PITON membership form. Read it all you like: the flag is not in what was typed. But the file carries more than the words on the page. Solving it unlocks the Web challenges.",
+        "hint": "Documents remember more than what is typed on the page: who made them, and a few notes about them. Your word processor can show them, and so can an archive tool.",
+        "links": [
+            "ctf/warmup/piton-membership-form.docx"
+        ],
+        "flag_hash": "078701063869a17371e675ae528cbb94454cda1fe0554368857c83ac2780e261"
+    },
+    {
+        "number": 33,
+        "category": "Warm-up",
+        "unlocks_category": "Forensics",
+        "title": "PITON Chant",
+        "points": 0,
+        "description": "At every PITON event the crowd taps a chant on the tables. Someone wrote it down: --. --- / .--. .. - --- -. / -.-. --- -.. . / - .... . / -. --- .-. - .... Submit the chant in lowercase, with underscores between the words, inside CTF{ }. Stuck? Warm-up hints are free. Solving it unlocks the Forensics challenges.",
+        "hint": "Before phones, messages travelled as long and short beeps. Each group of dots and dashes is one letter, and a slash is a space between words.",
+        "links": [],
+        "flag_hash": "738cb697ef3ada13abe1de1270f230813aa1786d5f1635b16cd333bf40925842"
+    }
+]
