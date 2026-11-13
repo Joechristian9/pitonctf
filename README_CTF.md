@@ -22,11 +22,11 @@ Admins see **Admin** and **Students** in the navigation. Roles come from [spatie
 
 **Warm-ups first.** Three PITON-themed warm-ups (0 points, no try limit, free hints) teach how to play. Each one unlocks a category, so students cannot start that category before solving it:
 
-| Warm-up                 | Students must                                                                                                                                                                      | Unlocks   |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| Warm-up                 | Students must                                                                                                                                                                                             | Unlocks   |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
 | 31 Welcome to PITON CTF | Find PITON's official page online and read its bio. **During class, the bio of PITON's Facebook page must contain flag 31 from `ctf-instructor/flags.php`, exactly as written** (capital letters matter). | Crypto    |
-| 32 Membership Form      | Find the flag in the hidden document properties (Comments) of a PITON membership form `.docx`                                                                                      | Web       |
-| 33 PITON Chant          | Decode a PITON chant written in Morse code                                                                                                                                         | Forensics |
+| 32 Membership Form      | Find the flag in the hidden document properties (Comments) of a PITON membership form `.docx`                                                                                                             | Web       |
+| 33 PITON Chant          | Decode a PITON chant written in Morse code                                                                                                                                                                | Forensics |
 
 Locked categories show only titles and points: no description, no files, and submissions are refused. Admins skip the warm-ups. Warm-ups never count on the scoreboard. To change which warm-up unlocks what, edit `unlocks_category` in `ctf-instructor/build_extra.php` and rebuild. Hints for every challenge are in `ctf-instructor/hints.php`. They are deliberately indirect: they nudge, they never name the tool or the steps. Warm-up hints point a little closer, so nobody stays locked out of a category. The verifier cannot open Facebook, so it reports warm-up 31 as SKIP: check the bio yourself before class.
 
