@@ -10,6 +10,7 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group
     Route::get('/', [GameController::class, 'show'])->name('game');
     Route::put('game', [GameController::class, 'update'])->name('game.update');
     Route::patch('game/status', [GameController::class, 'updateStatus'])->name('game.status');
+    Route::delete('game/scores', [GameController::class, 'resetScores'])->name('game.scores.destroy');
 
     Route::resource('challenges', ChallengeController::class)->except(['index', 'show']);
 

@@ -96,5 +96,5 @@ test('warm-ups do not count on the scoreboard', function () {
 
     $this->actingAs($this->student)
         ->get(route('scoreboard'))
-        ->assertInertia(fn (Assert $page) => $page->where('scoreboard.0.solved', 0));
+        ->assertInertia(fn (Assert $page) => $page->where('scoreboard.0.points', 0)->where('progression', []));
 });

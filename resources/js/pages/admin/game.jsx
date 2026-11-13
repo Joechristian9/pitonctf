@@ -1,5 +1,6 @@
 import { Form, Head, Link } from '@inertiajs/react';
-import { Eye, Lock, Pencil, Play, Plus, Trash2 } from 'lucide-react';
+import { Lock, Pencil, Play, Plus, RotateCcw, Trash2 } from 'lucide-react';
+import { useState } from 'react';
 import ChallengeController from '@/actions/App/Http/Controllers/Admin/ChallengeController';
 import GameController from '@/actions/App/Http/Controllers/Admin/GameController';
 import GameStatusBadge from '@/components/game-status-badge';
@@ -19,7 +20,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { challenges as studentView } from '@/routes';
 
 function StatusButton({ status, children }) {
     return (
@@ -39,10 +39,55 @@ function StatusButton({ status, children }) {
     );
 }
 
+/** Wipes every team's progress after a confirmation, so the class can play again from zero. */
+function ResetScores() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <DialogTrigger asChild>
+                <Button variant="outline">
+                    <RotateCcw />
+                    Reset scores
+                </Button>
+            </DialogTrigger>
+            <DialogContent>
+                <DialogTitle>Reset all scores?</DialogTitle>
+                <DialogDescription>
+                    Every team loses its points, solved challenges, used tries
+                    and opened hints. Warm-ups lock their categories again, so
+                    everyone starts over. Teams, students and challenges are
+                    kept. This cannot be undone.
+                </DialogDescription>
+                <Form
+                    {...GameController.resetScores.form()}
+                    options={{ preserveScroll: true }}
+                    onSuccess={() => setIsOpen(false)}
+                >
+                    {({ processing }) => (
+                        <DialogFooter className="gap-2">
+                            <DialogClose asChild>
+                                <Button variant="secondary">Cancel</Button>
+                            </DialogClose>
+                            <Button
+                                type="submit"
+                                variant="destructive"
+                                disabled={processing}
+                            >
+                                Reset scores
+                            </Button>
+                        </DialogFooter>
+                    )}
+                </Form>
+            </DialogContent>
+        </Dialog>
+    );
+}
+
 export default function AdminGame({ game, challenges }) {
     return (
         <>
-            <Head title={`Admin · ${game.name}`} />
+            <Head title="Challenges" />
             <div className="flex flex-1 flex-col gap-8 p-4">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div className="flex items-center gap-3">
@@ -65,12 +110,7 @@ export default function AdminGame({ game, challenges }) {
                                     : 'Start game'}
                             </StatusButton>
                         )}
-                        <Button variant="outline" asChild>
-                            <Link href={studentView()}>
-                                <Eye />
-                                View as student
-                            </Link>
-                        </Button>
+                        <ResetScores />
                     </div>
                 </div>
 
@@ -313,7 +353,7 @@ function DeleteChallenge({ challenge }) {
 AdminGame.layout = {
     breadcrumbs: [
         {
-            title: 'Admin',
+            title: 'Challenges',
             href: GameController.show(),
         },
     ],

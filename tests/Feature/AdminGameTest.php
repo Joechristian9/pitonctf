@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Attempt;
 use App\Models\Challenge;
 use App\Models\Game;
+use App\Models\Solve;
 use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -21,6 +23,7 @@ test('students cannot use the admin area', function (string $method, string $uri
     'start game' => ['patch', '/admin/game/status'],
     'new challenge' => ['post', '/admin/challenges'],
     'delete challenge' => ['delete', '/admin/challenges/1'],
+    'reset scores' => ['delete', '/admin/game/scores'],
     'list students' => ['get', '/admin/users'],
     'add student' => ['post', '/admin/users'],
     'add class list' => ['post', '/admin/users/bulk'],
@@ -80,4 +83,21 @@ test('an unknown game status is rejected', function () {
         ->assertSessionHasErrors('status');
 
     expect($game->fresh()->status)->toBe(Game::DRAFT);
+});
+
+test('resetting scores wipes all progress but keeps teams and challenges', function () {
+    $player = teamPlayer();
+    $challenge = Challenge::factory()->create();
+    Solve::create(['team_id' => $player->team_id, 'challenge_id' => $challenge->id, 'user_id' => $player->id, 'points' => 100]);
+    Attempt::create(['team_id' => $player->team_id, 'challenge_id' => $challenge->id, 'hint_used' => true]);
+
+    $this->actingAs(User::factory()->admin()->create())
+        ->delete(route('admin.game.scores.destroy'))
+        ->assertRedirect();
+
+    $this->assertDatabaseCount('solves', 0);
+    $this->assertDatabaseCount('attempts', 0);
+    $this->assertModelExists($challenge);
+    $this->assertModelExists($player->team);
+    expect($player->fresh()->team_id)->not->toBeNull();
 });

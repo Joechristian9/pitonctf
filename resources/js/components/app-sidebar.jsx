@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { Flag, ShieldCheck, Swords, Trophy, Users } from 'lucide-react';
+import { Flag, Swords, Trophy, Users } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -34,9 +34,9 @@ const mainNavItems = [
 
 const adminNavItems = [
     {
-        title: 'Admin',
+        title: 'Challenges',
         href: adminGame(),
-        icon: ShieldCheck,
+        icon: Flag,
     },
     {
         title: 'Teams',

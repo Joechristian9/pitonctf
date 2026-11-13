@@ -3,6 +3,7 @@
 use App\Models\Challenge;
 use App\Models\Solve;
 use App\Models\Team;
+use Illuminate\Support\Carbon;
 use Inertia\Testing\AssertableInertia as Assert;
 
 test('teams are ranked by earned points with ties going to the earliest last solve', function () {
@@ -36,7 +37,6 @@ test('teams are ranked by earned points with ties going to the earliest last sol
     $response->assertOk()->assertInertia(fn (Assert $page) => $page
         ->component('scoreboard')
         ->where('scoreboard.0.name', 'Bravo')
-        ->where('scoreboard.0.solved', 2)
         ->where('scoreboard.0.points', 100)
         ->has('scoreboard.0.members', 4)
         ->where('scoreboard.2.name', 'Delta')
@@ -44,4 +44,27 @@ test('teams are ranked by earned points with ties going to the earliest last sol
 
     expect(collect($response->inertiaProps('scoreboard'))->pluck('name')->all())
         ->toBe(['Bravo', 'Alpha', 'Delta', 'Charlie']);
+
+    // Every line starts at 0 at the first solve of the game, climbs per solve, and runs on to now.
+    $bravoLine = collect($response->inertiaProps('progression'))->firstWhere('name', 'Bravo');
+    $firstSolveAt = Carbon::parse('2026-11-04 09:00')->getTimestampMs();
+    expect($bravoLine['steps'])->toBe([
+        ['t' => $firstSolveAt, 'points' => 0],
+        ['t' => $firstSolveAt, 'points' => 50],
+        ['t' => Carbon::parse('2026-11-04 09:30')->getTimestampMs(), 'points' => 100],
+        ['t' => now()->getTimestampMs(), 'points' => 100],
+    ])->and(collect($response->inertiaProps('progression'))->firstWhere('name', 'Charlie')['steps'][0]['points'])->toBe(0);
+});
+
+test('the chart shows at most the top 10 teams and nothing before the first solve', function () {
+    Team::factory()->complete()->count(11)->create();
+
+    $this->actingAs(teamPlayer())
+        ->get(route('scoreboard'))
+        ->assertInertia(fn (Assert $page) => $page->has('scoreboard', 12)->where('progression', []));
+
+    Solve::create(['team_id' => Team::first()->id, 'challenge_id' => Challenge::factory()->create()->id, 'points' => 50]);
+
+    $this->get(route('scoreboard'))
+        ->assertInertia(fn (Assert $page) => $page->has('progression', 10));
 });

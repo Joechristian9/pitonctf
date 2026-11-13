@@ -3,7 +3,6 @@ import {
     BookOpen,
     Folder,
     Flag,
-    ShieldCheck,
     Swords,
     Trophy,
     Users,
@@ -64,9 +63,9 @@ const mainNavItems = [
 
 const adminNavItems = [
     {
-        title: 'Admin',
+        title: 'Challenges',
         href: adminGame(),
-        icon: ShieldCheck,
+        icon: Flag,
     },
     {
         title: 'Teams',

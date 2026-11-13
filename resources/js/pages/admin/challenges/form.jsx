@@ -26,7 +26,7 @@ export default function ChallengeForm({ challenge }) {
 
     setLayoutProps({
         breadcrumbs: [
-            { title: 'Admin', href: GameController.show() },
+            { title: 'Challenges', href: GameController.show() },
             {
                 title,
                 href: isEditing
@@ -42,7 +42,7 @@ export default function ChallengeForm({ challenge }) {
 
     return (
         <>
-            <Head title={`Admin · ${title}`} />
+            <Head title={title} />
             <div className="flex max-w-2xl flex-1 flex-col p-4">
                 <Heading title={title} />
 
