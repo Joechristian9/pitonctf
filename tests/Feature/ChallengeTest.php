@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Challenge;
+use App\Models\Guess;
 use App\Models\Team;
 use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -72,6 +73,39 @@ test('a wrong flag scores nothing and uses one of the team tries', function () {
         ->assertInertiaFlash('flagResult.message', 'Not quite. Your team has 7 tries left.');
 
     $this->assertDatabaseCount('solves', 0);
+});
+
+test('teammates see every wrong flag their team tried, other teams do not', function () {
+    $challenge = Challenge::factory()->withFlag('CTF{known_test_flag}')->create();
+    $player = teamPlayer();
+    $this->actingAs($player)->post(route('challenges.submit', $challenge), ['flag' => 'CTF{first}']);
+    $this->actingAs($player)->post(route('challenges.submit', $challenge), ['flag' => 'CTF{second}']);
+
+    $teammate = $player->team->members()->whereKeyNot($player->id)->firstOrFail();
+    $this->actingAs($teammate)
+        ->get(route('challenges'))
+        ->assertInertia(fn (Assert $page) => $page->where("categories.{$challenge->category}.0.guesses", [
+            ['flag' => 'CTF{second}', 'by' => $player->name],
+            ['flag' => 'CTF{first}', 'by' => $player->name],
+        ]));
+
+    $this->actingAs(teamPlayer())
+        ->get(route('challenges'))
+        ->assertInertia(fn (Assert $page) => $page->where("categories.{$challenge->category}.0.guesses", []));
+});
+
+test('only the latest tried flags are sent, so a scripted guesser cannot grow the page', function () {
+    $challenge = Challenge::factory()->create();
+    $player = teamPlayer();
+    foreach (range(1, Guess::SHOWN + 5) as $number) {
+        Guess::create(['team_id' => $player->team_id, 'challenge_id' => $challenge->id, 'flag' => "CTF{guess_{$number}}"]);
+    }
+
+    $this->actingAs($player)
+        ->get(route('challenges'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->has("categories.{$challenge->category}.0.guesses", Guess::SHOWN)
+            ->where("categories.{$challenge->category}.0.guesses.0.flag", 'CTF{guess_'.(Guess::SHOWN + 5).'}'));
 });
 
 test('an empty flag is rejected', function () {
@@ -148,6 +182,25 @@ test('a hint opened by one member is shown to the team and halves the reward', f
     $this->post(route('challenges.submit', $challenge), ['flag' => 'CTF{known_test_flag}'])
         ->assertInertiaFlash('flagResult.message', "Correct! +75 points for {$player->team->name}.");
     $this->assertDatabaseHas('solves', ['challenge_id' => $challenge->id, 'points' => 75]);
+
+    // Another team never gets a hint it did not pay for.
+    $this->actingAs(teamPlayer())
+        ->get(route('challenges'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where("categories.{$challenge->category}.0.hint", null));
+});
+
+test('opening hints is limited to 10 per minute per student', function () {
+    $challenge = Challenge::factory()->create(['hint' => 'Look behind the curtain.']);
+    $this->actingAs(teamPlayer());
+
+    foreach (range(1, 10) as $request) {
+        $this->post(route('challenges.hint', $challenge))->assertRedirect();
+    }
+
+    $this->post(route('challenges.hint', $challenge))
+        ->assertRedirect()
+        ->assertInertiaFlash('toast.message', 'Too many requests. Try again in a minute.');
 });
 
 test('a challenge without a hint has nothing to reveal', function () {

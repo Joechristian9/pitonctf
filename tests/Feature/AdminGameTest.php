@@ -3,6 +3,7 @@
 use App\Models\Attempt;
 use App\Models\Challenge;
 use App\Models\Game;
+use App\Models\Guess;
 use App\Models\Solve;
 use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -24,6 +25,8 @@ test('students cannot use the admin area', function (string $method, string $uri
     'new challenge' => ['post', '/admin/challenges'],
     'delete challenge' => ['delete', '/admin/challenges/1'],
     'reset scores' => ['delete', '/admin/game/scores'],
+    'upload write-up template' => ['post', '/admin/game/writeup-template'],
+    'remove write-up template' => ['delete', '/admin/game/writeup-template'],
     'list students' => ['get', '/admin/users'],
     'add student' => ['post', '/admin/users'],
     'add class list' => ['post', '/admin/users/bulk'],
@@ -36,7 +39,7 @@ test('the admin home shows the game and its challenges', function () {
     Challenge::factory()->for($game)->count(2)->create();
 
     $this->actingAs(User::factory()->admin()->create())
-        ->get(route('admin.game'))
+        ->get(route('challenges'))
         ->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('admin/game')
@@ -90,6 +93,7 @@ test('resetting scores wipes all progress but keeps teams and challenges', funct
     $challenge = Challenge::factory()->create();
     Solve::create(['team_id' => $player->team_id, 'challenge_id' => $challenge->id, 'user_id' => $player->id, 'points' => 100]);
     Attempt::create(['team_id' => $player->team_id, 'challenge_id' => $challenge->id, 'hint_used' => true]);
+    Guess::create(['team_id' => $player->team_id, 'challenge_id' => $challenge->id, 'flag' => 'CTF{nope}']);
 
     $this->actingAs(User::factory()->admin()->create())
         ->delete(route('admin.game.scores.destroy'))
@@ -97,6 +101,7 @@ test('resetting scores wipes all progress but keeps teams and challenges', funct
 
     $this->assertDatabaseCount('solves', 0);
     $this->assertDatabaseCount('attempts', 0);
+    $this->assertDatabaseCount('guesses', 0);
     $this->assertModelExists($challenge);
     $this->assertModelExists($player->team);
     expect($player->fresh()->team_id)->not->toBeNull();

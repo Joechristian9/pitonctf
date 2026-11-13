@@ -53,6 +53,17 @@ class AppServiceProvider extends ServiceProvider
 
                 return back();
             }));
+
+        // A team opens a hint once per challenge and uploads a write-up now and then, so these limits only stop scripts.
+        RateLimiter::for('hints', fn (Request $request): Limit => Limit::perMinute(10)->by($request->user()->id)->response($this->slowDown(...)));
+        RateLimiter::for('writeups', fn (Request $request): Limit => Limit::perMinute(5)->by($request->user()->id)->response($this->slowDown(...)));
+    }
+
+    private function slowDown(): RedirectResponse
+    {
+        Inertia::flash('toast', ['type' => 'error', 'message' => 'Too many requests. Try again in a minute.']);
+
+        return back();
     }
 
     /**

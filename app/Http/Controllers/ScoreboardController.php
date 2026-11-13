@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
 use App\Models\Solve;
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Builder;
@@ -39,7 +38,6 @@ class ScoreboardController extends Controller
             ]);
 
         return Inertia::render('scoreboard', [
-            'game' => Game::current()->only(['name', 'status']),
             'scoreboard' => $scoreboard,
             'progression' => $this->progression($scoreboard->take(self::CHART_TEAMS)),
         ]);
@@ -56,7 +54,7 @@ class ScoreboardController extends Controller
     }
 
     /**
-     * Each team's running total, as [time in ms, points] steps from the first solve of the game until now.
+     * Each team's running total, as [time in ms, points] steps from the first solve among these teams until now.
      *
      * @param  Collection<int, array{id: int, name: string, members: Collection<int|string, mixed>, points: int}>  $teams
      * @return list<array{id: int, name: string, steps: list<array{t: int, points: int}>}>

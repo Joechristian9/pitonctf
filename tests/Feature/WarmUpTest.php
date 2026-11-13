@@ -2,7 +2,6 @@
 
 use App\Models\Challenge;
 use App\Models\Solve;
-use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
@@ -83,12 +82,6 @@ test('a warm-up hint is free and shown straight away', function () {
             ->where('categories.Warm-up.0.hint', 'Read it backwards.')
             ->where('categories.Warm-up.0.hint_cost', 0)
             ->where('categories.Warm-up.0.tries_left', null));
-});
-
-test('admins skip the warm-ups', function () {
-    $this->actingAs(User::factory()->admin()->create())
-        ->get(route('challenges'))
-        ->assertInertia(fn (Assert $page) => $page->where('categories.Web.0.locked_by', null));
 });
 
 test('warm-ups do not count on the scoreboard', function () {

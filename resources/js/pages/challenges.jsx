@@ -1,4 +1,4 @@
-import { Head, usePage } from '@inertiajs/react';
+import { Head, usePoll } from '@inertiajs/react';
 import { Lock, Sparkles, Swords } from 'lucide-react';
 import ChallengeCard from '@/components/challenge-card';
 import GameStatusBadge from '@/components/game-status-badge';
@@ -8,12 +8,11 @@ import { challenges as challengesRoute } from '@/routes';
 const statusMessages = {
     locked: 'The game is locked. You can look around, but flags can no longer be submitted.',
     draft: "The game hasn't started yet. The challenges appear here once your instructor starts it.",
-    adminDraft:
-        'The game is a draft. Only admins can see these challenges, and flags cannot be submitted yet.',
 };
 
 export default function Challenges({ game, team, categories }) {
-    const { auth } = usePage().props;
+    // Live: a teammate's solve, an unlocked category or the game starting or locking shows up within 5 s.
+    usePoll(5000, { only: ['game', 'team', 'categories'] });
     const isPlayable = game.status === 'running';
     const hasChallenges = Object.keys(categories).length > 0;
 
@@ -29,16 +28,14 @@ export default function Challenges({ game, team, categories }) {
                     }
                 />
 
-                {!auth.isAdmin && <TeamBanner team={team} />}
+                <TeamBanner team={team} />
 
                 {!isPlayable && (
                     <p className="flex items-center gap-2 rounded-xl border p-4 text-sm">
                         <GameStatusBadge status={game.status} />
                         {game.status === 'locked'
                             ? statusMessages.locked
-                            : auth.isAdmin
-                              ? statusMessages.adminDraft
-                              : statusMessages.draft}
+                            : statusMessages.draft}
                     </p>
                 )}
 

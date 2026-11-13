@@ -13,7 +13,6 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { challenges, scoreboard } from '@/routes';
-import { game as adminGame } from '@/routes/admin';
 import { index as adminTeams } from '@/routes/admin/teams';
 import { index as adminUsers } from '@/routes/admin/users';
 
@@ -22,7 +21,7 @@ const mainNavItems = [
         title: 'Challenges',
         href: challenges(),
         icon: Flag,
-        // Admins manage challenges from Admin instead.
+        // Admins get the same link further down, after the Scoreboard.
         isStudentOnly: true,
     },
     {
@@ -35,7 +34,7 @@ const mainNavItems = [
 const adminNavItems = [
     {
         title: 'Challenges',
-        href: adminGame(),
+        href: challenges(),
         icon: Flag,
     },
     {

@@ -34,7 +34,7 @@ test('the admin creates a challenge with a hashed flag and uploaded files', func
     $this->post(route('admin.challenges.store'), challengeInput([
         'flag' => '  CTF{admin_made_flag} ',
         'files' => [UploadedFile::fake()->createWithContent('Index Page.HTML', '<p>hi</p>')],
-    ]))->assertRedirect(route('admin.game'));
+    ]))->assertRedirect(route('challenges'));
 
     $challenge = Challenge::where('title', 'Hidden Comment')->sole();
     $link = "ctf/uploads/{$challenge->id}/index-page.html";
@@ -88,7 +88,7 @@ test('editing without a flag keeps the old flag and removed files are deleted', 
         'title' => 'Renamed',
         // A path that is not one of this challenge's links is ignored.
         'remove_files' => ["ctf/uploads/{$challenge->id}/old.txt", 'ctf/web/robots.txt'],
-    ]))->assertRedirect(route('admin.game'));
+    ]))->assertRedirect(route('challenges'));
 
     $challenge->refresh();
     expect($challenge)
@@ -103,7 +103,7 @@ test('deleting a challenge removes its uploaded files', function () {
     Storage::disk('ctf')->put("{$challenge->id}/file.txt", 'data');
 
     $this->delete(route('admin.challenges.destroy', $challenge))
-        ->assertRedirect(route('admin.game'));
+        ->assertRedirect(route('challenges'));
 
     $this->assertModelMissing($challenge);
     Storage::disk('ctf')->assertMissing("{$challenge->id}/file.txt");

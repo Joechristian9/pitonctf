@@ -1,14 +1,20 @@
 import { Head, usePage, usePoll } from '@inertiajs/react';
 import { ChartLine, Trophy } from 'lucide-react';
-import ScoreProgressionChart from '@/components/score-progression-chart';
+import { lazy, Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { scoreboard as scoreboardRoute } from '@/routes';
+
+// The chart library is most of this page's code, so it loads after the leaderboard is already on screen.
+const ScoreProgressionChart = lazy(
+    () => import('@/components/score-progression-chart'),
+);
 
 export default function Scoreboard({ scoreboard, progression }) {
     const { auth } = usePage().props;
 
     // Only the live data is reloaded, so the rest of the page stays put.
-    usePoll(15000, { only: ['scoreboard', 'progression'] });
+    usePoll(5000, { only: ['scoreboard', 'progression'] });
 
     return (
         <>
@@ -27,13 +33,15 @@ export default function Scoreboard({ scoreboard, progression }) {
                         />
                     </h1>
                     <p className="mt-2 text-sm text-muted-foreground">
-                        Updates every 15 seconds. Ties go to whoever reached the
+                        Updates every 5 seconds. Ties go to whoever reached the
                         score first.
                     </p>
                 </header>
 
                 <Panel icon={ChartLine} title="Score progression">
-                    <ScoreProgressionChart progression={progression} />
+                    <Suspense fallback={<Skeleton className="h-80 w-full" />}>
+                        <ScoreProgressionChart progression={progression} />
+                    </Suspense>
                 </Panel>
 
                 <Panel icon={Trophy} title="Leaderboard">

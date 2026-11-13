@@ -1,6 +1,6 @@
 import { Form, Head, Link, setLayoutProps } from '@inertiajs/react';
 import ChallengeController from '@/actions/App/Http/Controllers/Admin/ChallengeController';
-import GameController from '@/actions/App/Http/Controllers/Admin/GameController';
+import { challenges as challengesRoute } from '@/routes';
 import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
@@ -26,7 +26,7 @@ export default function ChallengeForm({ challenge }) {
 
     setLayoutProps({
         breadcrumbs: [
-            { title: 'Challenges', href: GameController.show() },
+            { title: 'Challenges', href: challengesRoute() },
             {
                 title,
                 href: isEditing
@@ -213,9 +213,7 @@ export default function ChallengeForm({ challenge }) {
                                         : 'Create challenge'}
                                 </Button>
                                 <Button variant="ghost" asChild>
-                                    <Link href={GameController.show()}>
-                                        Cancel
-                                    </Link>
+                                    <Link href={challengesRoute()}>Cancel</Link>
                                 </Button>
                             </div>
                         </>

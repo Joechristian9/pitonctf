@@ -54,4 +54,12 @@ class Team extends Model
     {
         return $this->hasMany(Attempt::class);
     }
+
+    /**
+     * @return HasMany<Guess, $this>
+     */
+    public function guesses(): HasMany
+    {
+        return $this->hasMany(Guess::class);
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -55,6 +56,7 @@ class TeamController extends Controller
     public function destroy(Team $team): RedirectResponse
     {
         $team->delete();
+        Storage::disk('local')->deleteDirectory("writeups/{$team->id}");
 
         Inertia::flash('toast', ['type' => 'success', 'message' => "Deleted {$team->name}."]);
 

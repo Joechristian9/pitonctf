@@ -7,10 +7,13 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [GameController::class, 'show'])->name('game');
+    // Old /admin bookmarks still work; admins manage challenges at /challenges.
+    Route::redirect('/', '/challenges');
     Route::put('game', [GameController::class, 'update'])->name('game.update');
     Route::patch('game/status', [GameController::class, 'updateStatus'])->name('game.status');
     Route::delete('game/scores', [GameController::class, 'resetScores'])->name('game.scores.destroy');
+    Route::post('game/writeup-template', [GameController::class, 'uploadWriteupTemplate'])->name('game.writeup-template');
+    Route::delete('game/writeup-template', [GameController::class, 'removeWriteupTemplate'])->name('game.writeup-template.destroy');
 
     Route::resource('challenges', ChallengeController::class)->except(['index', 'show']);
 

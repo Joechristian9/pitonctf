@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ChallengeRequest;
+use App\Models\Attempt;
 use App\Models\Challenge;
 use App\Models\Game;
 use Illuminate\Http\RedirectResponse;
@@ -39,7 +40,7 @@ class ChallengeController extends Controller
 
         $this->storeFiles($request, $challenge);
 
-        return to_route('admin.game');
+        return to_route('challenges');
     }
 
     public function edit(Challenge $challenge): Response
@@ -60,6 +61,10 @@ class ChallengeController extends Controller
         // Only links the challenge already has can be removed, so no other file can be targeted.
         $removedLinks = array_intersect($challenge->links, $request->validated('remove_files', []));
 
+        $challenge->links = array_values(array_diff($challenge->links, $removedLinks));
+        $challenge->save();
+
+        // Files go only after the row is saved, so a failed save never leaves links to missing files.
         foreach ($removedLinks as $link) {
             // Files from the build script are shared and only unlinked; uploaded files are deleted.
             if (str_starts_with($link, self::UPLOAD_PREFIX)) {
@@ -67,12 +72,9 @@ class ChallengeController extends Controller
             }
         }
 
-        $challenge->links = array_values(array_diff($challenge->links, $removedLinks));
-        $challenge->save();
-
         $this->storeFiles($request, $challenge);
 
-        return to_route('admin.game');
+        return to_route('challenges');
     }
 
     /**
@@ -80,10 +82,13 @@ class ChallengeController extends Controller
      */
     public function destroy(Challenge $challenge): RedirectResponse
     {
-        Storage::disk('ctf')->deleteDirectory((string) $challenge->id);
+        $writeups = Attempt::where('challenge_id', $challenge->id)->whereNotNull('writeup_path')->pluck('writeup_path')->all();
         $challenge->delete();
+        // Files go only after the row, so a failed delete never leaves a challenge without its files.
+        Storage::disk('ctf')->deleteDirectory((string) $challenge->id);
+        Storage::disk('local')->delete($writeups);
 
-        return to_route('admin.game');
+        return to_route('challenges');
     }
 
     private function storeFiles(ChallengeRequest $request, Challenge $challenge): void

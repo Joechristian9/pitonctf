@@ -17,12 +17,12 @@ test('students see no challenges before the game starts', function () {
         ->assertDontSee($challenge->title);
 });
 
-test('admins can preview a draft game', function () {
+test('admins get the challenge manager at the same address, even for a draft game', function () {
     Challenge::factory()->for(Game::factory()->draft())->create(['category' => 'Web']);
 
     $this->actingAs(User::factory()->admin()->create())
         ->get(route('challenges'))
-        ->assertInertia(fn (Assert $page) => $page->has('categories.Web', 1));
+        ->assertInertia(fn (Assert $page) => $page->component('admin/game')->has('challenges', 1));
 });
 
 test('flags cannot be submitted unless the game is running', function (string $status) {

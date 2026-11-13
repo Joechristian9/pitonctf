@@ -7,8 +7,10 @@ import {
     Crosshair,
     Download,
     ExternalLink,
+    Eye,
     Lightbulb,
     Lock,
+    Upload,
 } from 'lucide-react';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
@@ -24,9 +26,14 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover';
 import { Spinner } from '@/components/ui/spinner';
 import { cn } from '@/lib/utils';
-import { hint, submit } from '@/routes/challenges';
+import { hint, submit, writeup } from '@/routes/challenges';
 
 // Four tiles per row on wide screens; a short last row stays centered (the parent is a centered flex-wrap).
 const tileWidth =
@@ -112,12 +119,17 @@ export default function ChallengeCard({ challenge, isPlayable }) {
 
 function ChallengeDetails({ challenge, isPlayable, isWarmUp }) {
     const { flash } = usePage();
+    const [result, setResult] = useState(null);
 
-    // Every tile gets the same flash, so only show it in the challenge it belongs to.
-    const result =
+    // Every tile gets the same flash, so only keep the one for this challenge. It is kept in
+    // state because the 5-second live refresh brings an empty flash that would wipe it.
+    const flashResult =
         flash?.flagResult?.challenge_id === challenge.id
             ? flash.flagResult
             : null;
+    if (flashResult !== null && flashResult !== result) {
+        setResult(flashResult);
+    }
     const inputId = `flag-${challenge.id}`;
 
     return (
@@ -195,6 +207,8 @@ function ChallengeDetails({ challenge, isPlayable, isWarmUp }) {
                     <Form
                         {...submit.form(challenge.id)}
                         options={{ preserveScroll: true }}
+                        // A wrong flag still returns OK with a message, so this clears the input for the next try.
+                        resetOnSuccess
                         disableWhileProcessing
                         className="grid gap-2"
                     >
@@ -243,8 +257,126 @@ function ChallengeDetails({ challenge, isPlayable, isWarmUp }) {
                 >
                     {result?.message}
                 </p>
+                {challenge.guesses?.length > 0 && (
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                className="mt-1 -ml-2"
+                            >
+                                <Eye />
+                                {`Tried answers (${challenge.guesses.length})`}
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent align="start" className="w-80 p-3">
+                            <p className="mb-2 text-sm font-medium">
+                                Your team already tried
+                            </p>
+                            <ul className="grid max-h-60 gap-1 overflow-y-auto text-sm">
+                                {challenge.guesses.map((guess, index) => (
+                                    <li
+                                        key={index}
+                                        className="flex flex-wrap items-center gap-2"
+                                    >
+                                        <code className="rounded bg-muted px-2 py-0.5 font-mono break-all">
+                                            {guess.flag}
+                                        </code>
+                                        {guess.by && (
+                                            <span className="text-xs text-muted-foreground">
+                                                by {guess.by}
+                                            </span>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </PopoverContent>
+                    </Popover>
+                )}
             </div>
+
+            <WriteupUpload challenge={challenge} />
         </div>
+    );
+}
+
+/** The team's write-up for this challenge: one PDF or Word file, replaced by each new upload. */
+function WriteupUpload({ challenge }) {
+    const { team, game } = usePage().props;
+    const inputId = `writeup-${challenge.id}`;
+    // The name we ask for, e.g. "Bravo-Sticky_Note", so the instructor can tell files apart.
+    const suggestedName = `${team?.name ?? 'team_name'}-${challenge.title}`
+        .trim()
+        .replace(/\s+/g, '_');
+
+    return (
+        <Form
+            {...writeup.form(challenge.id)}
+            options={{ preserveScroll: true }}
+            resetOnSuccess
+            disableWhileProcessing
+            className="grid gap-2 border-t pt-4"
+        >
+            {({ processing, errors }) => (
+                <>
+                    <Label htmlFor={inputId}>Write-up</Label>
+                    {game?.writeup_template_url && (
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="self-start"
+                            asChild
+                        >
+                            <a href={game.writeup_template_url} download>
+                                <Download />
+                                Download the template
+                            </a>
+                        </Button>
+                    )}
+                    {challenge.writeup && (
+                        <p className="text-sm text-muted-foreground">
+                            Your team uploaded{' '}
+                            <a
+                                href={challenge.writeup.url}
+                                className="font-medium break-all text-foreground underline underline-offset-4"
+                            >
+                                {challenge.writeup.name}
+                            </a>
+                            . A new upload replaces it.
+                        </p>
+                    )}
+                    <div className="flex flex-col gap-2 sm:flex-row">
+                        <Input
+                            id={inputId}
+                            type="file"
+                            name="writeup"
+                            accept=".pdf,.docx"
+                            required
+                            aria-invalid={errors.writeup ? true : undefined}
+                        />
+                        <Button
+                            type="submit"
+                            variant="outline"
+                            disabled={processing}
+                        >
+                            {processing ? <Spinner /> : <Upload />}
+                            Upload
+                        </Button>
+                    </div>
+                    <InputError message={errors.writeup} />
+                    <p className="text-xs text-muted-foreground">
+                        Name the file{' '}
+                        <code className="rounded bg-muted px-1 py-0.5 font-mono break-all text-foreground">
+                            {suggestedName}.pdf
+                        </code>{' '}
+                        (team name, a dash, then the challenge title). PDF or
+                        Word (.docx), up to 10 MB. Only your team and your
+                        instructor can open it.
+                    </p>
+                </>
+            )}
+        </Form>
     );
 }
 
