@@ -2,10 +2,10 @@
 
 Two branches live on GitHub:
 
-| Branch | What it is for |
-|---|---|
-| `master` | Day-to-day work. Commit here. |
-| `main` | The stable branch. GitHub's default branch, the one you deploy, and the one CI tests on every push (`.github/workflows/tests.yml`). |
+| Branch   | What it is for                                                                                                                      |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `master` | Day-to-day work. Commit here.                                                                                                       |
+| `main`   | The stable branch. GitHub's default branch, the one you deploy, and the one CI tests on every push (`.github/workflows/tests.yml`). |
 
 Work flows one way: **commit on `master` → merge into `main` → push `main`**.
 
